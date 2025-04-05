@@ -1,57 +1,47 @@
-name: Copy awbk to vlty
+name: Copy Files Between Repositories
 
-# 触发条件：手动触发
 on:
-  workflow_dispatch:
-
-# 权限设置
-permissions:
-  contents: write
-  actions: read
+  schedule:
+    - cron: '0 0 * * *' # 每天午夜触发
+  workflow_dispatch: # 允许手动触发
 
 jobs:
-  copy-awbk-to-vlty:
+  copy-files:
     runs-on: ubuntu-latest
+
     steps:
-      # 1. 检出源仓库（awbk）
-      - name: Checkout source repository (awbk)
+      # 1. Checkout the source repository (awbk)
+      - name: Checkout source repository
         uses: actions/checkout@v3
         with:
           repository: iawooo/awbk
-          path: source
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
-      # 2. 检出目标仓库（vlty）
-      - name: Checkout target repository (vlty)
-        uses: actions/checkout@v3
-        with:
-          repository: iawooo/vlty
-          path: target
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-
-      # 3. 删除目标仓库（vlty）根目录下的所有文件和文件夹
-      - name: Clear target repository (vlty) root
+      # 2. Commit and push files to target repository (vlty)
+      - name: Push to target repository
+        env:
+          TARGET_REPO: iawooo/vlty
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
-          echo "Deleting all files and folders in target root..."
-          cd target
-          find . -maxdepth 1 ! -name '.' -print0 | xargs -0 rm -rf
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
 
-      # 4. 复制 awbk 仓库的所有文件到 vlty 仓库根目录
-      - name: Copy files from awbk to vlty
-        run: |
-          echo "Copying all files from source to target root..."
-          cd target
-          cp -r ../source/* .
+          # Clone the target repository
+          git clone https://x-access-token:${PERSONAL_ACCESS_TOKEN}@github.com/${TARGET_REPO}.git target-repo
 
-      # 5. 提交更改到目标仓库（vlty）
-      - name: Commit and push changes to vlty
-        run: |
-          echo "Changing directory to target for Git operations..."
-          cd target
-          git config user.name "GitHub Actions Bot"
-          git config user.email "actions@github.com"
+          # Copy all files from source to target
+          cp -r ./* target-repo/
+
+          # Change to target repository directory
+          cd target-repo
+
+          # Add, commit, and push changes
           git add .
-          echo "Files staged for commit in vlty:"
-          git status
-          git commit -m "Copy all files from awbk to vlty" || echo "No changes to commit"
-          git push
+          git commit -m "Automated file copy from awbk to vlty"
+          git push origin main
+
+    permissions:
+      contents: write
+
+# Secrets needed in your GitHub repository settings:
+# 1. PERSONAL_ACCESS_TOKEN: A GitHub personal access token with repo scope
