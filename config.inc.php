@@ -41,14 +41,15 @@ $db->addServer($dbConfig, \Typecho\Db::READ | \Typecho\Db::WRITE);
 
 try {
     \Typecho\Db::set($db);
-    // 测试连接
     $db->query('SELECT 1');
     echo '数据库连接成功！';
 } catch (\Typecho\Db\Exception $e) {
     // 输出详细错误信息
-    die('Error establishing a database connection: ' . $e->getMessage() . 
-        '<br>Code: ' . $e->getCode() . 
-        '<br>Config: ' . print_r($dbConfig, true));
+    header('Content-Type: text/plain');
+    echo 'Error establishing a database connection: ' . $e->getMessage() . 
+         "\nCode: " . $e->getCode() . 
+         "\nConfig: " . print_r($dbConfig, true);
+    exit;
 }
 
 // 可以在这里添加 Typecho 的后续初始化代码，例如处理请求等
