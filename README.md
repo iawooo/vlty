@@ -4,4 +4,4 @@
 将这个仓库star，并fork。
 ## Vercel 一键部署 Typecho 博客
 
-[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/pbloods/typecho/)
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/iawooo/vlty)
