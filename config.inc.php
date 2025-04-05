@@ -41,12 +41,13 @@ $db->addServer($dbConfig, \Typecho\Db::READ | \Typecho\Db::WRITE);
 
 try {
     \Typecho\Db::set($db);
-    // 可选：测试数据库连接是否成功
-    // $db->query('SELECT 1');
-    // echo '数据库连接成功！';
+    // 测试连接
+    $db->query('SELECT 1');
+    echo '数据库连接成功！';
 } catch (\Typecho\Db\Exception $e) {
-    // 更详细的错误信息输出，便于调试
+    // 输出详细错误信息
     die('Error establishing a database connection: ' . $e->getMessage() . 
+        '<br>Code: ' . $e->getCode() . 
         '<br>Config: ' . print_r($dbConfig, true));
 }
 
