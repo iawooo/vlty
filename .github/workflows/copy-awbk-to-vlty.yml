@@ -10,35 +10,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout the source repository (awbk)
+      # 1. 设置 Git 用户信息
+      - name: Set up Git config
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      # 2. Checkout the source repository (awbk)
       - name: Checkout source repository
         uses: actions/checkout@v3
         with:
           repository: iawooo/awbk
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: source-repo # 克隆到 source-repo 目录
 
-      # 2. Commit and push files to target repository (vlty)
-      - name: Push to target repository
+      # 3. Clone the target repository (vlty)
+      - name: Clone target repository
         env:
           TARGET_REPO: iawooo/vlty
           PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-
-          # Clone the target repository
           git clone https://x-access-token:${PERSONAL_ACCESS_TOKEN}@github.com/${TARGET_REPO}.git target-repo
 
-          # Copy all files from source to target
-          cp -r ./* target-repo/
+      # 4. Copy files from source to target
+      - name: Copy files to target repository
+        run: |
+          cp -r source-repo/* target-repo/ # 从 source-repo 复制到 target-repo
 
-          # Change to target repository directory
-          cd target-repo
-
-          # Add, commit, and push changes
+      # 5. Commit and push changes to target repository
+      - name: Commit and push to target repository
+        working-directory: target-repo
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
           git add .
-          git commit -m "Automated file copy from awbk to vlty"
-          git push origin main
+          git commit -m "Automated file copy from awbk to vlty" || echo "No changes to commit"
+          git push https://x-access-token:${PERSONAL_ACCESS_TOKEN}@github.com/iawooo/vlty.git main
 
     permissions:
       contents: write
