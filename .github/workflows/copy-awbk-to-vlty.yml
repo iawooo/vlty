@@ -29,40 +29,25 @@ jobs:
           path: target
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
-      # 3. 确认当前工作目录 (调试用)
-      - name: Print current working directory (before target)
-        run: pwd
-
-      # 4. 删除目标仓库（vlty）根目录下的所有文件和文件夹
+      # 3. 删除目标仓库（vlty）根目录下的所有文件和文件夹
       - name: Clear target repository (vlty) root
-        working-directory: target
         run: |
           echo "Deleting all files and folders in target root..."
+          cd target
           find . -maxdepth 1 ! -name '.' -print0 | xargs -0 rm -rf
 
-      # 5. 确认当前工作目录 (调试用)
-      - name: Print current working directory (in target)
-        working-directory: target
-        run: pwd
-
-      # 6. 复制 awbk 仓库的所有文件到 vlty 仓库根目录
+      # 4. 复制 awbk 仓库的所有文件到 vlty 仓库根目录
       - name: Copy files from awbk to vlty
-        working-directory: target
         run: |
           echo "Copying all files from source to target root..."
+          cd target
           cp -r ../source/* .
 
-      # 7. 切换到 target 目录并执行 Git 命令
+      # 5. 提交更改到目标仓库（vlty）
       - name: Commit and push changes to vlty
-        working-directory: target
         run: |
-          echo "Changing directory to target..."
+          echo "Changing directory to target for Git operations..."
           cd target
-          echo "Current directory after cd:"
-          pwd
-          echo "Listing contents after cd:"
-          ls -al
-
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
           git add .
