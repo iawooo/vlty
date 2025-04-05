@@ -1,9 +1,9 @@
 # 1.介绍
-这是一个采用vercel进行部署typecho的Serverless项目。
+## 这是一个采用Vercel 一键部署 Typecho 博客的项目。
 # 2.如何使用？
 将这个仓库star，并fork。
-## Vercel 一键部署 Typecho 博客
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/import?s=https://github.com/iawooo/vlty&hasTrialAvailable=1&showOptionalTeamCreation=false&project-name=vlty&framework=other&totalProjects=1&remainingProjects=1)
+## 点击下方
+<a href="https://vercel.com/new/import?s=https://github.com/iawooo/vlty&hasTrialAvailable=1&showOptionalTeamCreation=false&project-name=vlty&framework=other&totalProjects=1&remainingProjects=1" target="_blank"><img src="https://vercel.com/button" alt="Deploy with Vercel"></a>
 ### 环境变量
 ```dotenv
 TYPECHO_DB_HOST="" # 数据库地址
