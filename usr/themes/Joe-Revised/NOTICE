@@ -1,0 +1,15 @@
+<p class="title">Joe修改版</p>
+<img src="https://img.shields.io/github/v/release/jd82k/Joe.svg?logo=git">
+<img src="https://img.shields.io/github/license/jd82k/Joe?logo=GitHub">
+<img src="https://img.shields.io/badge/PHP-v7.4+-666699.svg?logo=php">
+<img src="https://img.shields.io/badge/Typecho-v1.2.1+-467b96.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+gEDQw3Dk+MOQUAAAEKSURBVEjHrZW9boMwFIU/rKjKYD8BHZkhE8+SCd6rz5Opm7cMHcsT2FLULu7gVA1gMOH23AVZOsf3x9xTMEVFS0NDiUFjAIfHMWCxvPPBIo50XAiZuNBxTNFrrlnyb1ypp/Qzt830QODGeXz7c/QoUf/Vvj35cSH3XvS76IFAFwXynV+eCFDtpgcC1YF2Mo+CHMLDd6tosoQ1NAdOK/obBBSlKINXhRYJaIURCZiCL15GR0tTSPfmW4nuBxR+dlM60vAKJ0rA/YPAIBIYFHZyVKzEHHYu8Bys+HcG4UJRwNvuAu5M8VIVr3UQG0vMQmRtsRf9JnPtH811/rqivZ8o0Rg04HF4PtP2/gPrHa+89Wx6HgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNC0wNC0xM1QxMjo1NToxNCswMDowMEXzkBcAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjQtMDQtMTNUMTI6NTU6MTQrMDA6MDA0riirAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI0LTA0LTEzVDEyOjU1OjE0KzAwOjAwY7sJdAAAAABJRU5ErkJggg=="><br>
+<span style="line-height: normal;">Telegram 群组: <a href="https://t.me/JoeModified" target="_blank" rel="noopener noreferrer">https://t.me/JoeModified</a></span><br>
+<span style="line-height: normal;">最新版下载地址：</span><a href="https://github.com/jd82k/Joe/releases" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/github/v/release/jd82k/Joe.svg?logo=git"></a><br>
+注意事项：
+<ol>
+	<li>版本要求： PHP 7.4 或更高，Typecho 1.2.1 或更高</li>
+	<li>使用本主题需要开启伪静态（Typecho后台设置启动固定链接）</li>
+	<li>使用主题需要关闭typecho调试功能，即 __TYPECHO_DEBUG__ 应设为 false ，因为主题的API接口是借用异常捕获来返回的</li>
+	<li>如果安装了Joe原版主题，需要手动备份原Joe主题的所有设置后删除theme目录下的原主题Joe文件夹，再将本主题的Joe文件夹上传到theme目录，不要图省事简单覆盖。</li>
+	<li>原Joe主题有重大漏洞，PHP模板文件可以直接被浏览器打开执行，所有使用Joe主题的理论上都应当切换到此版本。</li>
+</ol>

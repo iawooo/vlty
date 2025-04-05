@@ -1,0 +1,137 @@
+button,
+input,
+optgroup,
+select,
+textarea {
+	font-family: 'Joe Font';
+}
+
+.container {
+	margin-top: 40px;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.container>div>.card-body {
+	padding: 2.25rem;
+	background: var(--background);
+	border-radius: 5px;
+	width: 500px;
+	max-width: 90vw;
+	box-shadow: var(--box-shadow);
+	margin-bottom: 30px;
+}
+
+.container>div>.text-muted {
+	margin-bottom: 30px;
+}
+
+.container .card-body>.title {
+	text-align: center;
+	margin-bottom: 2.25rem;
+}
+
+.container .title>h4 {
+	font-weight: 700;
+	margin-bottom: 10px;
+	font-size: 1.125rem;
+	color: var(--routine);
+}
+
+.container .title>p {
+	color: var(--seat);
+}
+
+.container .form-group {
+	margin-bottom: 1.5rem;
+}
+
+.container .input-group {
+	display: flex;
+}
+
+.container .form-group>label {
+	color: var(--routine);
+	font-weight: 600;
+	display: inline-block;
+	margin-bottom: .5rem;
+}
+
+.container .form-group>a {
+	float: right;
+	/* color: var(--minor); */
+}
+
+.container .form-control {
+	display: block;
+	width: 100%;
+	padding: .45rem .9rem;
+	font-size: .875rem;
+	line-height: 1.5;
+	color: var(--routine);
+	background: var(--background);
+	border: 2px solid var(--classA);
+	border-radius: .1rem;
+	transition: 0.3s;
+}
+
+.container .form-control:focus {
+	border-color: var(--theme);
+}
+
+.container .btn {
+	text-align: center;
+	font-weight: 400;
+	white-space: nowrap;
+	user-select: none;
+	font-size: .875rem;
+	transition: 0.3s;
+}
+
+.container .btn-light {
+	display: block;
+	padding: .45rem 1.2rem;
+	line-height: 1.5;
+	border-radius: var(--main-radius);
+	color: #fff;
+	background: var(--theme);
+	border-color: var(--classB);
+	margin: auto;
+	box-shadow: 1px 1px 3px -1px var(--theme);
+	border: none;
+}
+
+.container .btn-light:hover {
+	opacity: 0.9;
+}
+
+.container .btn-light:active {
+	opacity: 0.7;
+}
+
+.container .input-group>.form-control {
+	border-right: none;
+}
+
+.container .input-group>.btn {
+	border: 2px solid var(--classA);
+	border-left: none;
+	padding: .45rem .9rem;
+	background: var(--classB);
+	color: var(--main);
+}
+
+.container .input-group>.btn:hover {
+	border-color: var(--seat);
+	background: var(--classA);
+}
+
+.container .input-group>.btn:focus {
+	background: var(--seat);
+}
+
+.container .text-muted {
+	/* color: var(--minor); */
+	text-align: center
+}

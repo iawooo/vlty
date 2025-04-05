@@ -1,0 +1,7 @@
+{
+    "require": {
+        "network/http": "dev-master",
+        "zoujingli/ip2region": "^2.0",
+        "phpmailer/phpmailer": "^6.9"
+    }
+}

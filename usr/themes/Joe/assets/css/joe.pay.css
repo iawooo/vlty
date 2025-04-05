@@ -1,0 +1,129 @@
+/*----支付弹窗------*/
+
+.pay-payment.wxpay .pay-logo {
+	background-image: url(../images/pay/pay-wechat-logo.svg);
+}
+
+.pay-payment.alipay .pay-logo {
+	background-image: url(../images/pay/pay-alipay-logo.svg);
+}
+
+.pay-payment.qqpay .pay-logo {
+	background-image: url(../images/pay/pay-qq-logo.svg);
+}
+
+.modal-pay-body .row-5 {
+	display: inline-block;
+	width: 40%;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.modal-pay-body .row-5.hide-sm {
+	margin-right: 80px;
+}
+
+.modal-pay-body .pay-qrcon {
+	background: var(--main-bg-color);
+	border-radius: 8px;
+	position: relative;
+	line-height: 1.5;
+	overflow: hidden;
+}
+
+.modal-pay-body .pay-qrcon .qrcon {
+	padding: 20px;
+}
+
+.pay-switch {
+	padding: 0 30px;
+	font-size: 13px;
+	margin-top: -12px;
+	margin-bottom: 5px;
+}
+
+.pay-switch .but {
+	margin: 5px 0;
+}
+
+.pay-qrcon .pay-logo-name {
+	vertical-align: middle;
+	margin-left: 10px;
+	display: inline-block;
+}
+
+.pay-payment .t-alipay,
+.pay-payment .t-wxpay,
+.pay-payment .t-qqpay {
+	display: none;
+}
+
+.pay-payment.alipay .t-alipay,
+.pay-payment.wxpay .t-wxpay,
+.pay-payment.qqpay .t-qqpay {
+	display: inline-block;
+}
+
+.pay-payment.qqpay>.modal-body>.hide-sm {
+	display: none;
+}
+
+.pay-payment.qqpay>.modal-pay-body>.row-5+.row-5 {
+	margin: auto;
+	width: 240px;
+	display: block;
+}
+
+.pay-qrcon .pay-logo {
+	height: 35px;
+	width: 35px;
+	display: inline-block;
+	max-width: 100%;
+	background-repeat: no-repeat;
+	vertical-align: middle;
+	background-size: contain;
+	background-position: center;
+}
+
+.pay-qrcon .pay-qrcode {
+	width: 140px;
+	height: 140px;
+	margin: 10px auto;
+	position: relative;
+}
+
+.pay-qrcon .pay-notice {
+	color: #fff;
+	font-size: 13px;
+}
+
+.pay-payment.wxpay .pay-notice .notice {
+	background: #0fb90d;
+}
+
+.pay-payment.alipay .pay-notice .notice {
+	background: #1678ff;
+}
+
+.pay-payment.qqpay .pay-notice .notice {
+	background: #12b7f5;
+}
+
+.pay-qrcon .pay-notice .notice {
+	padding: 17px 5px;
+	transition: .5s;
+}
+
+.pay-qrcon .pay-notice .notice.load,
+.pay-qrcon .pay-notice .notice.warning {
+	background: #f8a53d;
+}
+
+.pay-qrcon .pay-notice .notice.danger {
+	background: #f85342;
+}
+
+.pay-qrcon .pay-notice .notice.success {
+	background: rgba(55, 193, 255, 0.15);
+	color: #03a0ff;
+}
