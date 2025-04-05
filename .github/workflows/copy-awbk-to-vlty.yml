@@ -1,0 +1,56 @@
+name: Copy awbk to vlty
+
+# 触发条件：手动触发
+on:
+  workflow_dispatch:
+
+# 权限设置
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  copy-awbk-to-vlty:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 检出源仓库（awbk）
+      - name: Checkout source repository (awbk)
+        uses: actions/checkout@v3
+        with:
+          repository: iawooo/awbk
+          path: source
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+      # 2. 检出目标仓库（vlty）
+      - name: Checkout target repository (vlty)
+        uses: actions/checkout@v3
+        with:
+          repository: iawooo/vlty
+          path: target
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+      # 3. 删除目标仓库（vlty）根目录下的所有文件和文件夹
+      - name: Clear target repository (vlty) root
+        working-directory: target
+        run: |
+          echo "Deleting all files and folders in target root..."
+          find . -maxdepth 1 ! -name '.' -print0 | xargs -0 rm -rf
+
+      # 4. 复制 awbk 仓库的所有文件到 vlty 仓库根目录
+      - name: Copy files from awbk to vlty
+        working-directory: target
+        run: |
+          echo "Copying all files from source to target root..."
+          cp -r ../source/* .
+
+      # 5. 提交更改到目标仓库（vlty）
+      - name: Commit and push changes to vlty
+        working-directory: target
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add .
+          echo "Files staged for commit in vlty:"
+          git status
+          git commit -m "Copy all files from awbk to vlty" || echo "No changes to commit"
+          git push
