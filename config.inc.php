@@ -30,8 +30,8 @@ $dbConfig = array (
     'sslVerify' => getenv('TYPECHO_DB_SSL_VERIFY') === 'true',
 );
 
-// 检查 SSL CA 文件是否存在
-if ($dbConfig['sslCa'] && !file_exists($dbConfig['sslCa'])) {
+// 只有当 sslCa 不为 null 时才检查文件是否存在
+if ($dbConfig['sslCa'] !== null && !file_exists($dbConfig['sslCa'])) {
     die('错误：SSL CA 证书文件 ' . $dbConfig['sslCa'] . ' 不存在！请将 ' . getenv('TYPECHO_DB_SSL_CA') . ' 文件放在 index.php 所在的目录。');
 }
 
@@ -45,7 +45,9 @@ try {
     // $db->query('SELECT 1');
     // echo '数据库连接成功！';
 } catch (\Typecho\Db\Exception $e) {
-    die('Error establishing a database connection: ' . $e->getMessage());
+    // 更详细的错误信息输出，便于调试
+    die('Error establishing a database connection: ' . $e->getMessage() . 
+        '<br>Config: ' . print_r($dbConfig, true));
 }
 
 // 可以在这里添加 Typecho 的后续初始化代码，例如处理请求等
