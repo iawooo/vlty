@@ -23,9 +23,11 @@ define('__TYPECHO_THEME_DIR__', '/usr/themes');
 define('__TYPECHO_ADMIN_DIR__', '/admin/');
 
 /** 设置包含路径 */
-@set_include_path(get_include_path() . PATH_SEPARATOR .
+@set_include_path(
+    get_include_path() . PATH_SEPARATOR .
     __TYPECHO_ROOT_DIR__ . '/var' . PATH_SEPARATOR .
-    __TYPECHO_ROOT_DIR__ . __TYPECHO_PLUGIN_DIR__);
+    __TYPECHO_ROOT_DIR__ . __TYPECHO_PLUGIN_DIR__
+);
 
 /** 载入API支持 */
 require_once 'Typecho/Common.php';
@@ -34,15 +36,20 @@ require_once 'Typecho/Common.php';
 Typecho_Common::init();
 
 /** 定义数据库参数 */
-$db = new Typecho_Db($_ENV["TYPECHO_ADAPTER_NAME"], $_ENV["TYPECHO_PREFIX"]);
-$db->addServer(array(
-    'host' => $_ENV["TYPECHO_HOST"],
-    'user' => $_ENV["TYPECHO_USERNAME"],
-    'password' => $_ENV["TYPECHO_PASSWORD"],
-    'charset' => $_ENV["TYPECHO_CHARSET"],
-    'port' => $_ENV["TYPECHO_PORT"],
-    'database' => $_ENV["TYPECHO_DATABASE"],
-    'engine' => $_ENV["TYPECHO_ENGINE"],
-    'sslCa' => dirname(__FILE__) . '/' . $_ENV["TYPECHO_SSL_CA"],
-), Typecho_Db::READ | Typecho_Db::WRITE);
+$prefix = isset($_ENV["TYPECHO_PREFIX"]) && !empty($_ENV["TYPECHO_PREFIX"]) ? $_ENV["TYPECHO_PREFIX"] : 'typecho_';
+$db = new Typecho_Db($_ENV["TYPECHO_ADAPTER_NAME"] ?? 'Mysql', $prefix);
+$db->addServer(
+    [
+        'host' => $_ENV["TYPECHO_HOST"],
+        'user' => $_ENV["TYPECHO_USERNAME"],
+        'password' => $_ENV["TYPECHO_PASSWORD"],
+        'charset' => $_ENV["TYPECHO_CHARSET"] ?? 'utf8mb4',
+        'port' => $_ENV["TYPECHO_PORT"] ?? 3306,
+        'database' => $_ENV["TYPECHO_DATABASE"],
+        'engine' => $_ENV["TYPECHO_ENGINE"] ?? 'InnoDB',
+        'sslCa' => dirname(__FILE__) . '/' . ($_ENV["TYPECHO_SSL_CA"] ?? ''),
+    ],
+    Typecho_Db::READ | Typecho_Db::WRITE
+);
 Typecho_Db::set($db);
+?>
