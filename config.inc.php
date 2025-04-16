@@ -40,12 +40,12 @@ $prefix = isset($_ENV["TYPECHO_PREFIX"]) && !empty($_ENV["TYPECHO_PREFIX"]) ? $_
 $db = new Typecho_Db($_ENV["TYPECHO_ADAPTER_NAME"] ?? 'Mysql', $prefix);
 $db->addServer(
     [
-        'host' => $_ENV["TYPECHO_HOST"],
-        'user' => $_ENV["TYPECHO_USERNAME"],
-        'password' => $_ENV["TYPECHO_PASSWORD"],
+        'host' => $_ENV["TYPECHO_HOST"] ?? 'localhost',
+        'user' => $_ENV["TYPECHO_USERNAME"] ?? 'root',
+        'password' => $_ENV["TYPECHO_PASSWORD"] ?? '',
         'charset' => $_ENV["TYPECHO_CHARSET"] ?? 'utf8mb4',
         'port' => $_ENV["TYPECHO_PORT"] ?? 3306,
-        'database' => $_ENV["TYPECHO_DATABASE"],
+        'database' => $_ENV["TYPECHO_DATABASE"] ?? 'typecho',
         'engine' => $_ENV["TYPECHO_ENGINE"] ?? 'InnoDB',
         'sslCa' => dirname(__FILE__) . '/' . ($_ENV["TYPECHO_SSL_CA"] ?? ''),
     ],
