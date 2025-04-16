@@ -1,33 +1,48 @@
 <?php
-// site root path
+/**
+ * Typecho Blog Platform
+ *
+ * @copyright  Copyright (c) 2008 Typecho team (http://www.typecho.org)
+ * @license    GNU General Public License 2.0
+ * @version    $Id$
+ */
+
+/** 开启https */
+define('__TYPECHO_SECURE__', true);
+
+/** 定义根目录 */
 define('__TYPECHO_ROOT_DIR__', dirname(__FILE__));
 
-// plugin directory (relative path)
+/** 定义插件目录(相对路径) */
 define('__TYPECHO_PLUGIN_DIR__', '/usr/plugins');
 
-// theme directory (relative path)
+/** 定义模板目录(相对路径) */
 define('__TYPECHO_THEME_DIR__', '/usr/themes');
 
-// admin directory (relative path)
+/** 后台路径(相对路径) */
 define('__TYPECHO_ADMIN_DIR__', '/admin/');
 
-// register autoload
-require_once __TYPECHO_ROOT_DIR__ . '/var/Typecho/Common.php';
+/** 设置包含路径 */
+@set_include_path(get_include_path() . PATH_SEPARATOR .
+    __TYPECHO_ROOT_DIR__ . '/var' . PATH_SEPARATOR .
+    __TYPECHO_ROOT_DIR__ . __TYPECHO_PLUGIN_DIR__);
 
-// init
-\Typecho\Common::init();
+/** 载入API支持 */
+require_once 'Typecho/Common.php';
 
-// config db
-$db = new \Typecho\Db('Pdo_Mysql', 'typecho_');
-$db->addServer(array (
-  'host' => 'mysql.sqlpub.com',
-  'port' => 3306,
-  'user' => 'aweisql',
-  'password' => '2UYNFUn3D5Zlf0t8',
-  'charset' => 'utf8mb4',
-  'database' => 'aweisql',
-  'engine' => 'InnoDB',
-  'sslCa' => '',
-  'sslVerify' => false,
-), \Typecho\Db::READ | \Typecho\Db::WRITE);
-\Typecho\Db::set($db);
+/** 程序初始化 */
+Typecho_Common::init();
+
+/** 定义数据库参数 */
+$db = new Typecho_Db($_ENV["TYPECHO_ADAPTER_NAME"], $_ENV["TYPECHO_PREFIX"]);
+$db->addServer(array(
+    'host' => $_ENV["TYPECHO_HOST"],
+    'user' => $_ENV["TYPECHO_USERNAME"],
+    'password' => $_ENV["TYPECHO_PASSWORD"],
+    'charset' => $_ENV["TYPECHO_CHARSET"],
+    'port' => $_ENV["TYPECHO_PORT"],
+    'database' => $_ENV["TYPECHO_DATABASE"],
+    'engine' => $_ENV["TYPECHO_ENGINE"],
+    'sslCa' => dirname(__FILE__) . '/' . $_ENV["TYPECHO_SSL_CA"],
+), Typecho_Db::READ | Typecho_Db::WRITE);
+Typecho_Db::set($db);
